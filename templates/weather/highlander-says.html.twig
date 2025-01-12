@@ -6,6 +6,27 @@
 <p> {{ forcast }}</p>
 {# this is a comment #}
 
+
+<nav>
+<a href="{{ path('app_weather_highlendersays',{
+        threshold: 50,
+})}}">Try again!</a>
+</nav>
+
 {% endblock %}
+
+
+
+{% block javascripts %}
+
+{{parent()}}
+
+<script>
+    const route = "{{ url('app_weather_highlendersays')|escape('js')}}";
+    console.log(route);
+</script>
+
+{% endblock %}
+
 
 {% block title %} Highlander Says {% endblock %}

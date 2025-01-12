@@ -20,7 +20,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
         $forecast = $draw < $threshold ? "It's going to rain" : "It's going to be sunny" ;
 
         $json = [
-            'forecast' => $forecast,
+            'forecast' => $forecast    
         ];
 
         return new JsonResponse($json);
