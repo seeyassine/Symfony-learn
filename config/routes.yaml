@@ -3,3 +3,17 @@ controllers:
         path: ../src/Controller/
         namespace: App\Controller
     type: attribute
+
+
+#weather:
+ #   resource: 'routes/weather.yaml'
+#    prifix: '/weather'
+#    name_prefix: 'weather_'
+
+#home:
+ #   path: /
+  #  contoller: Symfony\Bundle\FrameworkBundle\Controller\RedirectController
+  #  defaults: 
+   #     routes: weather_highlander_says     # if you want to use attribute app_weather_highlandersays
+    #    permanent: false 
+     #   threshold: 42
