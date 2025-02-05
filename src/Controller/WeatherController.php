@@ -5,6 +5,7 @@ namespace App\Controller;
 
 use App\Model\HighlanderApiDTO;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Attribute\MapQueryParameter;
 use Symfony\Component\HttpKernel\Attribute\MapQueryString;
@@ -45,9 +46,20 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
     }
 
-    #[Route('/highlander-says/{threshold<\d+>?50}',  methods:['GET','POST'])]   //, priority: 2
-    public function highlenderSays(int $threshold,Request $request ): Response  // for default parameter we do highlenderSays(int $threshold = 50)
+    #[Route('/highlander-says/{threshold<\d+>}',  methods:['GET','POST'])]   //, priority: 2
+    public function highlenderSays(
+       Request $request,
+       RequestStack $requestStack,
+       ?int $threshold = null
+    ): Response  // for default parameter we do highlenderSays(int $threshold = 50)
     {
+        $session = $requestStack->getSession();
+        if ($threshold){
+            $session->set('threshold', $threshold);
+        }else{
+            $threshold = $session->get('threshold');
+        }
+
         $trials = $request->get('trials',1);
 
         $forecasts = [];
@@ -59,7 +71,8 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
         }
 
         return $this->render('weather/highlander-says.html.twig',[    //return new Response("<html><body>$forecast</body></html>"); 
-                'forecasts' => $forecasts   ,
+                'forecasts' => $forecasts,
+                'threshold' => $threshold,
         ]);
 
     }

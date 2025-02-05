@@ -9,6 +9,7 @@
     {% endfor %}
 {# this is a comment #}
 
+{% if threshold %}<p> Threshold: {{ threshold }}. </p>{% endif %}
 
 <nav>
 <a href="{{ path('app_weather_highlendersays',{
