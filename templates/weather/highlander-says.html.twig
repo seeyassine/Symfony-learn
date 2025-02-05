@@ -3,7 +3,10 @@
 {% block body %}
 
 <h1> Highlander Says</h1>
+
+{% for forcast in forecasts %}
 <p> {{ forcast }}</p>
+    {% endfor %}
 {# this is a comment #}
 
 
