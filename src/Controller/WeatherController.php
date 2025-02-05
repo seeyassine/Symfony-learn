@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Attribute\MapQueryParameter;
 use Symfony\Component\HttpKernel\Attribute\MapQueryString;
+use Symfony\Component\HttpKernel\Attribute\MapRequestPayload;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
@@ -21,7 +22,7 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
    // #[Route('/highlander-says/{threshold<\d+>?50}', host: 'api.localhost', methods:['GET','POST'])]   //, priority: 2
     #[Route('/highlander-says/api')]
     public function highlenderSaysApi(
-        #[MapQueryString] ?HighlanderApiDTO $dto = null): Response  // for default parameter we do highlenderSays(int $threshold = 50)
+        #[MapRequestPayload] ?HighlanderApiDTO $dto = null): Response  // for default parameter we do highlenderSays(int $threshold = 50)
     {
         if(!$dto){
         $dto = new HighlanderApiDTO();
